@@ -1,63 +1,87 @@
 import React, { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator} from '@react-navigation/stack';
 
-import {StyleSheet, SafeAreaView, View, Text, Button, FlatList, TouchableOpacity } from 'react-native';
-import { Item } from './src/components';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import 'react-native-gesture-handler';
+import {StyleSheet, SafeAreaView, View, Alert, Text, Button, FlatList, TouchableOpacity } from 'react-native';
+import HomeScreen from './src/screens/HomeScreen';
+import DetailsScreen from './src/screens/DetailsScreen';
+import SettingsScreen from './src/screens/SettingsScreen';
+Icon.loadFont();
 
-const DATA = [
-  {
-    id: '1',
-    title: 'First Item'
-  },
-  {
-    id: '2',
-    title: 'Second Item'
-  },
-  {
-    id: '3',
-    title: 'Third Item'
-  },
-]
+const LogoItem = () => {
+  return(
+    <View style={styles.logoContainer}>
+      <Text style={styles.logoTitle}>Главная</Text>
+      <Icon name="home" size={25} color="black"/>
+    </View>
+  )
+}
 
-const App: () => React$Node = () => {
-  const [selectedId, setSelectedId] = useState(null);
 
-  const renderItem = ({item}) => {
-    console.log({item})
-    console.log({selectedId})
+const App = () => {
+  
+  const Stack = createStackNavigator();
+  const Tab = createBottomTabNavigator();
 
-    let backgroundColor = '';
-    if(item.id === selectedId){
-      backgroundColor = 'gray'
-    }else{
-      backgroundColor = '#fdb827'
-    }
-    //const backgroundColor = item.id === selectedId ? 'gray' : 'skyblue';
+  const HomeStack = () => {
     return(
-      <Item item={item} backgroundColor={backgroundColor}  handleOnPress = {()=> setSelectedId(item.id)}/>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen}/>
+        <Stack.Screen name="Details" component={DetailsScreen}/>
+      </Stack.Navigator>
     )
+   
   }
 
-
-
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={DATA}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        extraData={selectedId}
-      />
-
-    </SafeAreaView>
+    <NavigationContainer>
+      <Tab.Navigator
+        tabBarOptions={{
+          activeTintColor: 'skyblue',
+          inactiveTintColor: 'gray'
+        }}
+        screenOptions={({route}) => ({
+          tabBarIcon: ({ focused, color, size}) => {
+            let iconName;
+            if(route.name === 'Home'){
+              iconName= 'home'
+            }else if(route.name === 'Settings'){
+              iconName ='gear'
+            }
+            return(
+              <Icon name={iconName} color={color} size={size} />
+            )
+          }
+        })}
+      >
+        <Tab.Screen name={'Home'} component={HomeStack}/>
+        <Tab.Screen name={'Settings'} component={SettingsScreen}/>
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center'
+  },
+  logoContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 8
+  },
+  logoTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
   }
-
 });
 
 export default App;
