@@ -49,14 +49,16 @@ const HomeScreen = ({navigation}) => {
   const renderItem = ({item}) => {
     const backgroundColor = item.id === selectedId ? 'gray' : 'skyblue';
     return(
-      <Item item={item} backgroundColor={backgroundColor}  handleOnPress = {()=> handleOpenDetails(item.id)} />
+      <Item item={item} backgroundColor={backgroundColor}  handleOnPress = {()=> handleOpenDetails(item.id)} data={data} handleData={changeData}/>
     )
+  }
+  const changeData = (val) => {
+    setData(val)
   }
 
   const handleOpenDetails = (id) => {
     const selectedItem = data.filter(item => item.id === id);
-    console.log({selectedItem})
-    navigation.navigate('Details', { details: selectedItem[0].post })
+    navigation.navigate('Details', { details: selectedItem[0].post, id:  selectedItem[0].id, data, handleData: changeData })
   }  
 
   return (
