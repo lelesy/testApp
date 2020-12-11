@@ -23,12 +23,6 @@ const HomeScreen = ({navigation}) => {
   const [ data, setData] = useState([]);
   const db = SQLite.openDatabase({ name: 'news.db', createFromLocation: '~www/news.db'}, null, error => handleError(error));
   
-  const renderItem = ({item}) => {
-    const backgroundColor = item.id === selectedId ? 'gray' : 'skyblue';
-    return(
-      <Item item={item} backgroundColor={backgroundColor}  handleOnPress = {()=> navigation.navigate('Details')}/>
-    )
-  }
   useEffect(()=>{ handleGetData().then(res=>setData(res)) }, [])
   
   const handleGetData = async () => {
@@ -48,12 +42,22 @@ const HomeScreen = ({navigation}) => {
     });
   }
 
-  console.log({data})
-
   const handleError = (error) => {
     console.log(error);
   }
-  
+
+  const renderItem = ({item}) => {
+    const backgroundColor = item.id === selectedId ? 'gray' : 'skyblue';
+    return(
+      <Item item={item} backgroundColor={backgroundColor}  handleOnPress = {()=> handleOpenDetails(item.id)} />
+    )
+  }
+
+  const handleOpenDetails = (id) => {
+    const selectedItem = data.filter(item => item.id === id);
+    console.log({selectedItem})
+    navigation.navigate('Details', { details: selectedItem[0].post })
+  }  
 
   return (
     <SafeAreaView style={styles.container}>

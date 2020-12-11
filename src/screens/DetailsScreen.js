@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text }  from 'react-native';
 
-const DetailsScreen = () => {
+const DetailsScreen = ({route}) => {
+    const { details } = route.params;
     return(
         <View style={{ flex: 1, justifyContent: 'center'}}>
-            <Text style={{ textAlign: 'center'}}>Detail's screen</Text>
+            <Text style={{ textAlign: 'center'}}>{details}</Text>
         </View>
     )
 }
