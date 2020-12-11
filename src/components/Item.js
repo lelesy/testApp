@@ -5,7 +5,8 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 const Item = ({item, backgroundColor, handleOnPress}) => {
     return(
         <TouchableOpacity style={[styles.item,  { backgroundColor }] } onPress={handleOnPress}>
-          <Text style={styles.title}>{item.title}</Text> 
+          <Text style={styles.title}>{item.Title}</Text> 
+          
         </TouchableOpacity>
     )
 }

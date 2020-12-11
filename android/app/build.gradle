@@ -187,6 +187,7 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
+    implementation project(':react-native-sqlite-storage')
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
     }
@@ -200,6 +201,7 @@ dependencies {
         exclude group:'com.facebook.flipper'
     }
 
+    apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
         debugImplementation files(hermesPath + "hermes-debug.aar")

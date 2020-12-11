@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator} from '@react-navigation/stack';
-
 import Icon from 'react-native-vector-icons/FontAwesome';
 import 'react-native-gesture-handler';
 import {StyleSheet, SafeAreaView, View, Alert, Text, Button, FlatList, TouchableOpacity } from 'react-native';
-import HomeScreen from './src/screens/HomeScreen';
-import DetailsScreen from './src/screens/DetailsScreen';
-import SettingsScreen from './src/screens/SettingsScreen';
+import  { HomeScreen, DetailsScreen, SettingsScreen}  from './src/screens';
+
+import SQLite from 'react-native-sqlite-storage';
+
 Icon.loadFont();
 
 const LogoItem = () => {
@@ -22,10 +22,36 @@ const LogoItem = () => {
 
 
 const App = () => {
-  
+
   const Stack = createStackNavigator();
   const Tab = createBottomTabNavigator();
 
+  // const db = SQLite.openDatabase({ name: 'sqlite.db', createFromLocation: '~www/sqlite.db'}, ()=> { handleSuccess()}, (error) => handleError(error) );
+  // const [ data, setData] = useState([]);
+  // const handleSuccess = () => {
+  //   db.transaction(tx => {
+  //     tx.executeSql('SELECT * FROM Posts', [], (tx, results) => {
+  //       const len = results.rows.length;
+  //       let posts = [];
+  //       console.log('len',len);
+  //       if (len > 0) {
+  //         for (let i = 0; i < len; i++) {
+  //           let row = results.rows.item(i);
+  //           posts.push(row);
+  //           //setData(state=> ({...state, data: posts}));
+  //         }
+  //       };
+  //       //setData(posts)
+  //       console.log(posts, 2222)
+  //     }, (error)=>{Alert.alert(error)});
+  //   })
+  // }
+  // //console.log({data})
+
+  // const handleError = (error) => {
+  //   console.log({error});
+  // }
+  
   const HomeStack = () => {
     return(
       <Stack.Navigator>

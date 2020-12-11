@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/u9531/Desktop/LevelUp/lesson1/testApp/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-hu/values-hu.xml",
+            "outputFile": "/Users/u9531/Desktop/LevelUp/testApp/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-hu/values-hu.xml",
             "map": [
                 {
                     "source": "/Users/u9531/.gradle/caches/transforms-2/files-2.1/639e914bfc1efa21e36199d3ff2c5eef/core-1.1.0/res/values-hu/values-hu.xml",
